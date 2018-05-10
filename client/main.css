@@ -95,7 +95,7 @@ form button:hover {
 #login-sign-in-link {
     padding: 13px 23px;
     color: #fff;
-    background-color: #dc3545;
+    background-color: #203470;
     font-weight: bold;
     box-sizing: border-box;
     border-width: 2px;
@@ -106,7 +106,7 @@ form button:hover {
 }
 
 #login-sign-in-link:hover {
-    background-color: #cc2a3a;
+    background-color: #203470;
     -webkit-transition: background-color 500ms ease;
     -moz-transition: background-color 500ms ease;
     -o-transition: background-color 500ms ease;
@@ -181,7 +181,7 @@ textarea.fohm-control {
     top: 10%;
     padding: 2% 2% !important;
     margin-left:-30vmin;
-    background: rgba(220, 53, 69, 0.95);
+    background: rgba(48, 96, 152, 0.95);
     border-radius: 5px;
 
 }
@@ -268,7 +268,7 @@ textarea.fohm-control {
 
 .login-close-text:hover {
     font-weight: 500;
-    color: #dc3545;
+    color: rgba(48, 96, 152, 0.95);
 }
 .login-text-and-button{
     margin-top: 5%;
@@ -395,4 +395,21 @@ textarea.fohm-control {
     margin-bottom: 0px;
     padding-bottom: 8px;
     transition: opacity 0.3s ease-in-out;
+}
+#login-buttons-google {
+    color: #203470;
+    padding: 10px 0px;
+    margin-top: 4%;
+    margin-bottom: 4%;
+    background-color: #FFFFFF;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#login-buttons-google:hover {
+    background-color: lightgray;
+    -webkit-transition: background-color 500ms ease;
+    -moz-transition: background-color 500ms ease;
+    -o-transition: background-color 500ms ease;
+    transition: background-color 500ms ease;
 }
