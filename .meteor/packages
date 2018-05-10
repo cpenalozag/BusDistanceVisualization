@@ -23,3 +23,5 @@ static-html
 react-meteor-data
 accounts-ui-unstyled
 accounts-password
+accounts-google
+google-config-ui
