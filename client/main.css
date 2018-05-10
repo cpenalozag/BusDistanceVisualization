@@ -1,0 +1,36 @@
+/* CSS declarations go here */
+.jumbotron {
+    min-height: 100vh;
+    margin-bottom: 0 !important;
+}
+.list-group{
+    max-height: 60vh;
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
+h1 {
+    text-align: center;
+    margin: auto;
+    margin-bottom: 5vh;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+a:hover {
+    text-decoration: none !important;
+    color: black !important;
+}
+.list-group-item:hover, list-group-item:active{
+    background-color: lightgray;
+}
+a.nostyle:link {
+    text-decoration: inherit;
+    color: inherit;
+}
+
+a.nostyle:visited {
+    text-decoration: inherit;
+    color: inherit;
+}
