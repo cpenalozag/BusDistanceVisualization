@@ -7,9 +7,10 @@ Meteor.methods({
     "vehicles.get"(agency) {
         try {
             const res = HTTP.get(`http://webservices.nextbus.com/service/publicJSONFeed?command=vehicleLocations&a=${agency}&t=0`);
+            if (!res.data.vehicle) return "";
             return res.data.vehicle;
         } catch (error) {
-            throw new Meteor.Error('oops', 'something broke');
+            return "";
         }
     }
 

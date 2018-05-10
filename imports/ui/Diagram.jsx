@@ -1,21 +1,58 @@
 import React, {Component} from "react";
 import * as d3 from "d3";
+import * as d3Chromatic from "d3-scale-chromatic";
 
 class Diagram extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props);
+
         this.svg;
-        this.state = {};
+        this.margin = {top: 40, left: 40, right: 40, bottom: 20};
+        this.state = {
+
+        };
     }
 
     componentDidMount() {
-        var svg = d3.select(this.svg),
-            margin = {top: 40, left: 40, right: 40, bottom: 40};
+        const svg = d3.select(this.svg);
+        this.width = +svg.attr("width") - this.margin.left - this.margin.right,
+            this.height = +svg.attr("height") - this.margin.top - this.margin.bottom,
+            this.g = svg.append("g").attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
+
+        this.x = d3.scaleBand()
+            .rangeRound([0, this.width - this.margin.left - this.margin.right])
+            .paddingInner(0.05)
+            .align(0.1);
+
+        this.y = d3.scaleLinear()
+            .rangeRound([this.height - this.margin.top - this.margin.bottom, 0]);
+
+        this.z = d3.scaleSequential(d3Chromatic.interpolateBlues);
+
+        this.g.append("g")
+            .attr("class", "axis--x")
+            .attr("transform", "translate(0," + (this.height - this.margin.top - this.margin.bottom) + ")")
+            .call(d3.axisBottom(this.x));
+
+        this.g.append("g")
+            .attr("class", "axis--y")
+            .append("text")
+            .attr("x", 2)
+            .attr("dy", "0.32em")
+            .attr("fill", "#000")
+            .attr("font-weight", "bold")
+            .attr("text-anchor", "start")
+            .text("Added distance");
+
     }
 
     componentDidUpdate() {
-        let nestedBuses = d3.nest().key((d) => d.routeTag).entries(this.props.data);
+        this.update(this.props.data);
+    }
+
+    update(data) {
+        let nestedBuses = d3.nest().key((d) => d.routeTag).entries(data);
+        if (!nestedBuses ||nestedBuses.length===0) return;
         this.computeDistances(nestedBuses);
         let maxNumBuses = d3.max(nestedBuses.map((d) => d.values.length));
         let keys = d3.range(maxNumBuses);
@@ -24,81 +61,79 @@ class Diagram extends Component {
             .value((d, key) => {
                 return key < d.values.length ? d.values[key].distance : 0;
             })(nestedBuses)
-        console.log(stackedBuses);
-        console.log(typeof stackedBuses);
-    }
 
-    update(data){
-        var svg = d3.select(this.svg),
-            width = +svg.attr("width") - margin.left - margin.right,
-            height = +svg.attr("height") - margin.top - margin.bottom,
-            g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        this.x.domain(nestedBuses.map(function (d) {
+            return d.key;
+        }));
 
-        var x = d3.scaleBand()
-            .rangeRound([0, width])
-            .paddingInner(0.05)
-            .align(0.1);
+        this.y.domain([0, d3.max(nestedBuses, function (d) {
+            return d.total;
+        })]).nice();
+        this.z.domain([0, maxNumBuses]);
 
-        var y = d3.scaleLinear()
-            .rangeRound([height, 0]);
+        this.g.selectAll("rect").remove()
+            .transition().duration(1000)
 
-        var z = d3.scaleOrdinal()
-            .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
-
-        x.domain(data.map(function(d) { return d.State; }));
-        y.domain([0, d3.max(data, function(d) { return d.total; })]).nice();
-        z.domain(keys);
-
-        g.append("g")
+        this.g.append("g")
             .selectAll("g")
-            .data(d3.stack().keys(keys)(data))
-            .enter().append("g")
-            .attr("fill", function(d) { return z(d.key); })
+            .data(stackedBuses)
+            .enter()
+            .append("g")
+            .attr("fill", (d) => {
+                return this.z(d.key);
+            })
+            .attr("stroke", "white")
             .selectAll("rect")
-            .data(function(d) { return d; })
+            .data(function (d) {
+                return d;
+            })
             .enter().append("rect")
-            .attr("x", function(d) { return x(d.data.State); })
-            .attr("y", function(d) { return y(d[1]); })
-            .attr("height", function(d) { return y(d[0]) - y(d[1]); })
-            .attr("width", x.bandwidth());
+            .attr("x", (d) => {
+                return this.x(d.data.key);
+            })
+            .attr("y", (d) => {
+                return this.y(d[1]);
+            })
+            .attr("height", (d) => {
+                return this.y(d[0]) - this.y(d[1]);
+            })
+            .attr("width", this.x.bandwidth());
 
-        g.append("g")
-            .attr("class", "axis")
-            .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x));
+        this.g.select(".axis--x")
+            .transition().duration(1000)
+            .call(d3.axisBottom(this.x));
 
-        g.append("g")
-            .attr("class", "axis")
-            .call(d3.axisLeft(y).ticks(null, "s"))
-            .append("text")
-            .attr("x", 2)
-            .attr("y", y(y.ticks().pop()) + 0.5)
-            .attr("dy", "0.32em")
-            .attr("fill", "#000")
-            .attr("font-weight", "bold")
-            .attr("text-anchor", "start")
-            .text("Population");
+        this.g.select(".axis--y")
+            .transition().duration(1000)
+            .call(d3.axisLeft(this.y).ticks(null, "s"));
 
-        var legend = g.append("g")
+        this.g.select(".legend").remove();
+
+        var legend = this.g.append("g")
+            .attr("class","legend")
             .attr("font-family", "sans-serif")
             .attr("font-size", 10)
             .attr("text-anchor", "end")
             .selectAll("g")
             .data(keys.slice().reverse())
             .enter().append("g")
-            .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+            .attr("transform", function (d, i) {
+                return "translate(-50," + i * 20 + ")";
+            });
 
         legend.append("rect")
-            .attr("x", width - 19)
+            .attr("x", this.width - 19)
             .attr("width", 19)
             .attr("height", 19)
-            .attr("fill", z);
+            .attr("fill", this.z);
 
         legend.append("text")
-            .attr("x", width - 24)
+            .attr("x", this.width - 24)
             .attr("y", 9.5)
             .attr("dy", "0.32em")
-            .text(function(d) { return d; });
+            .text(function (d) {
+                return d;
+            });
     }
 
     computeDistances(nestedBuses) {
@@ -138,7 +173,7 @@ class Diagram extends Component {
         return (
             <div>
                 <svg
-                    width="800"
+                    width="1200"
                     height="600"
                     ref={(svg) => this.svg = svg}>
 

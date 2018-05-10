@@ -1,30 +1,55 @@
 /* CSS declarations go here */
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand, a, button, input, select, textarea {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Montserrat", "Helvetica", Arial, sans-serif;
+    font-weight: 300;
+}
+
 .jumbotron {
+    background: -moz-linear-gradient(0deg, dimgrey 0%, gray 25%, darkgrey 50%, lightgray 75%, lightgray 100%);
+    background: -webkit-linear-gradient(0deg, dimgrey 0%, gray 25%, darkgrey 50%, lightgray 75%, lightgray 100%);
+    background: linear-gradient(0deg, dimgrey 0%, gray 25%, darkgrey 50%, lightgray 75%, lightgray 100%);
     min-height: 100vh;
     margin-bottom: 0 !important;
 }
-.list-group{
+
+.list-group {
     max-height: 60vh;
     margin-bottom: 10px;
-    overflow:scroll;
+    overflow: scroll;
     -webkit-overflow-scrolling: touch;
 }
+
 h1 {
     text-align: center;
     margin: auto;
     margin-bottom: 5vh;
 }
+
 a {
+    cursor: pointer;
     text-decoration: none;
     color: black;
 }
+
 a:hover {
     text-decoration: none !important;
     color: black !important;
 }
-.list-group-item:hover, list-group-item:active{
+
+.list-group-item:hover {
     background-color: lightgray;
 }
+
+list-group-item:active {
+    background-color: lightgray;
+}
+
+.list-group-item:visited {
+    background-color: lightgray;
+}
+
 a.nostyle:link {
     text-decoration: inherit;
     color: inherit;
@@ -33,4 +58,27 @@ a.nostyle:link {
 a.nostyle:visited {
     text-decoration: inherit;
     color: inherit;
+}
+
+a.nostyle:visited {
+    text-decoration: inherit;
+    color: inherit;
+}
+
+.media-area-small p {
+    font-size: 14px;
+}
+
+.form-control {
+    background-color: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    color: #444444 !important;
+    font-size: 14px;
+    transition: background-color 0.3s ease 0s;
+    padding-right: 0 !important;
+    padding: 7px 12px;
+    height: 40px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
