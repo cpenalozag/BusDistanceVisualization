@@ -54,6 +54,7 @@ class Diagram extends Component {
         let nestedBuses = d3.nest().key((d) => d.routeTag).entries(data);
         if (!nestedBuses || nestedBuses.length === 0) return;
         this.computeDistances(nestedBuses);
+        nestedBuses = nestedBuses.filter((r)=>r.total>0);
         let maxNumBuses = d3.max(nestedBuses.map((d) => d.values.length));
         let keys = d3.range(maxNumBuses);
         let stackedBuses = d3.stack()
@@ -118,7 +119,7 @@ class Diagram extends Component {
             .data(keys.slice().reverse())
             .enter().append("g")
             .attr("transform", function (d, i) {
-                return "translate(-50," + i * 20 + ")";
+                return "translate(-50," + i * 15 + ")";
             });
 
         legend.append("rect")
