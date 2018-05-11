@@ -35,7 +35,7 @@ class CommentList extends Component {
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     {Meteor.userId() ?
                         <input className="form-control border-input" type="text" ref="textInput"
-                               placeholder="Type to add a new comment"/> :
+                               placeholder={"Write your comments about route " + this.props.route}/> :
                         <input className="form-control border-input" type="text" ref="textInput" disabled
                                placeholder="You need to log in to write a comment!"/>
                     }

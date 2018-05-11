@@ -43,6 +43,7 @@ class Diagram extends Component {
             .attr("text-anchor", "start")
             .text("Added distance");
 
+        this.update(this.props.data);
     }
 
     componentDidUpdate() {

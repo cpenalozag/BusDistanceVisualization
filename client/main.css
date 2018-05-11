@@ -249,12 +249,10 @@ textarea.fohm-control {
 #login-email-label-and-input {
     display: flex;
     align-items: center;
-    margin: 0 18px;
 }
 #login-username-label-and-input {
     display: flex;
     align-items: center;
-    margin: 0 18px;
 }
 
 #login-password-label-and-input {
@@ -340,7 +338,7 @@ textarea.fohm-control {
     text-align: left;
     color: #fff;
     font-family: Montserrat;
-    width: 70%;
+    width: 65%;
     margin: auto;
     border: 0;
     border-radius: 4px;
@@ -356,7 +354,7 @@ textarea.fohm-control {
     text-align: left;
     color: #fff;
     font-family: Montserrat;
-    width: 70%;
+    width: 65%;
     margin: auto;
     border: 0;
     border-radius: 4px;
@@ -377,7 +375,7 @@ textarea.fohm-control {
     text-align: left;
     color: #fff;
     font-family: Montserrat;
-    width: 70%;
+    width: 65%;
     margin: auto;
     border: 0;
     border-radius: 4px;
@@ -396,6 +394,7 @@ textarea.fohm-control {
     transition: opacity 0.3s ease-in-out;
 }
 #login-username-label-and-input label {
+    text-align: left;
     font-family: Montserrat;
     color: white;
     width: 100%;
@@ -418,6 +417,7 @@ textarea.fohm-control {
 }
 
 #login-password-label-and-input label {
+    text-align: left;
     font-family: Montserrat;
     color: white;
     width: 100%;
