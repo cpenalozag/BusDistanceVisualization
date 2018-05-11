@@ -8,9 +8,7 @@ class Diagram extends Component {
 
         this.svg;
         this.margin = {top: 40, left: 40, right: 40, bottom: 5};
-        this.state = {
-
-        };
+        this.state = {};
     }
 
     componentDidMount() {
@@ -41,6 +39,7 @@ class Diagram extends Component {
             .attr("dy", "0.32em")
             .attr("fill", "#000")
             .attr("font-weight", "bold")
+            .attr("font-size", "16px")
             .attr("text-anchor", "start")
             .text("Added distance");
 
@@ -52,7 +51,7 @@ class Diagram extends Component {
 
     update(data) {
         let nestedBuses = d3.nest().key((d) => d.routeTag).entries(data);
-        if (!nestedBuses ||nestedBuses.length===0) return;
+        if (!nestedBuses || nestedBuses.length === 0) return;
         this.computeDistances(nestedBuses);
         let maxNumBuses = d3.max(nestedBuses.map((d) => d.values.length));
         let keys = d3.range(maxNumBuses);
@@ -82,7 +81,7 @@ class Diagram extends Component {
             .attr("fill", (d) => {
                 return this.z(d.key);
             })
-            .attr("stroke", "white")
+            .attr("stroke", "grey")
             .selectAll("rect")
             .data(function (d) {
                 return d;
@@ -110,7 +109,7 @@ class Diagram extends Component {
         this.g.select(".legend").remove();
 
         var legend = this.g.append("g")
-            .attr("class","legend")
+            .attr("class", "legend")
             .attr("font-family", "sans-serif")
             .attr("font-size", 10)
             .attr("text-anchor", "end")

@@ -5,6 +5,11 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand, a, but
     font-family: "Montserrat", "Helvetica", Arial, sans-serif;
 }
 
+p {
+    font-size: 16px;
+    text-align: center;
+}
+
 .jumbotron {
     background: -moz-linear-gradient(0deg, dimgrey 0%, gray 25%, darkgrey 50%, lightgray 75%, lightgray 100%);
     background: -webkit-linear-gradient(0deg, dimgrey 0%, gray 25%, darkgrey 50%, lightgray 75%, lightgray 100%);
@@ -19,7 +24,9 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand, a, but
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
 }
-
+.info-text{
+    margin-bottom: 3vh;
+}
 h1 {
     text-align: center;
     margin-top: 4vh !important;

@@ -100,13 +100,16 @@ class App extends Component {
                         <div className="row"><h1>Distance Between Buses Visualization</h1></div>
                         <div className="row">
                             <div className="col-md-12">
-                                {!this.state.selected ? <h4>Select an agency to start visualizing</h4> :
+                                {!this.state.selected ? <h4>Select an agency in the list below to start visualizing!</h4> :
                                     <h4>{this.state.name}</h4>}
                                 <Diagram data={this.state.data}/>
                             </div>
                         </div>
                     </div>
                     <div className="container text-center">
+                        <div className="row">
+                            <h4 className="info-text">Choose an agency to see its routes and visualization. Select any route to see what people think about it.</h4>
+                        </div>
                         <div className="row">
                             <div className="col-md-4">
                                 <h2>Agencies</h2>
