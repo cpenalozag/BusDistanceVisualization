@@ -13,14 +13,17 @@ class CommentList extends Component {
 
         // Find the text field via the React ref
         const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
-        Meteor.call("Comments.insert", text, this.props.id);
+        Meteor.call("Comments.insert", text, this.props.route);
         // Clear form
         ReactDOM.findDOMNode(this.refs.textInput).value = "";
 
     }
 
     renderComments() {
-        return this.props.comments.map((comment) => (
+        const filtered = this.props.comments.filter((comment) => {
+            return comment.route === this.props.route;
+        })
+        return filtered.map((comment) => (
             <Comment key={comment._id} comment={comment}/>
         ));
     }
@@ -30,8 +33,12 @@ class CommentList extends Component {
             <div className="media-area">
                 <h2 className="text-center title">Comments</h2>
                 <form onSubmit={this.handleSubmit.bind(this)}>
-                        <input className="form-control" type="text" ref="textInput"
-                               placeholder="Type to add a new comment"/>
+                    {Meteor.userId() ?
+                        <input className="form-control border-input" type="text" ref="textInput"
+                               placeholder="Type to add a new comment"/> :
+                        <input className="form-control border-input" type="text" ref="textInput" disabled
+                               placeholder="You need to log in to write a comment!"/>
+                    }
                 </form>
                 {this.renderComments()}
             </div>

@@ -12,6 +12,16 @@ Meteor.methods({
         } catch (error) {
             return "";
         }
+    },
+    "routes.get"(agency){
+        try {
+            const res = HTTP.get(`http://webservices.nextbus.com/service/publicJSONFeed?command=routeList&a=${agency}`);
+            if (!res) return "";
+            return res;
+        } catch (error) {
+            return "";
+        }
     }
+
 
 });

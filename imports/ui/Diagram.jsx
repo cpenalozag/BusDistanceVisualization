@@ -7,7 +7,7 @@ class Diagram extends Component {
         super(props);
 
         this.svg;
-        this.margin = {top: 40, left: 40, right: 40, bottom: 20};
+        this.margin = {top: 40, left: 40, right: 40, bottom: 5};
         this.state = {
 
         };

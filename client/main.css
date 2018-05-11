@@ -65,8 +65,29 @@ a.nostyle:visited {
     color: inherit;
 }
 
+.media {
+    padding: 3vh 3vh;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+}
+.media-body p {
+    text-align: justify;
+
+}
+
 .media-area-small p {
-    font-size: 14px;
+    text-align: left;
+    font-size: 16px;
+}
+.text-muted {
+    font-size: 16px;
+}
+.media-heading {
+    text-align: left;
+}
+.border-input{
+    font-size: 16px;
+    margin-bottom: 1vh;
 }
 
 .form-control {

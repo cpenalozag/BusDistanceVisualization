@@ -3,6 +3,7 @@ import {Inject} from "meteor/meteorhacks:inject-initial";
 
 import "../imports/api/agencies"
 import "../imports/api/vehicleLocations"
+import "../imports/api/comments"
 
 Meteor.startup(() => {
     // code to run on server at startup
