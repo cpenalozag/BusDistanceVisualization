@@ -85,11 +85,14 @@ a.nostyle:visited {
 .media-heading {
     text-align: left;
 }
-.border-input{
+.border-input {
     font-size: 16px;
     margin-bottom: 1vh;
 }
-
+#login-name-link {
+    font-weight: 400 !important;
+    font-size: 18px;
+}
 .form-control {
     background-color: #FFFFFF;
     border: 1px solid #DDDDDD;
