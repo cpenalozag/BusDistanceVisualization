@@ -7,6 +7,8 @@ import {Comments} from "../api/comments";
 import Diagram from "./Diagram";
 import CommentList from "./CommentList";
 import Nav from "./Nav";
+import Map from "./Map";
+import Schedule from "./stops";
 
 class App extends Component {
     constructor(props) {
@@ -100,7 +102,8 @@ class App extends Component {
                         <div className="row"><h1>Distance Between Buses Visualization</h1></div>
                         <div className="row">
                             <div className="col-md-12">
-                                {!this.state.selected ? <h4>Select an agency in the list below to start visualizing!</h4> :
+                                {!this.state.selected ?
+                                    <h4>Select an agency in the list below to start visualizing!</h4> :
                                     <h4>{this.state.name}</h4>}
                                 <Diagram data={this.state.data}/>
                             </div>
@@ -108,7 +111,8 @@ class App extends Component {
                     </div>
                     <div className="container text-center">
                         <div className="row">
-                            <h4 className="info-text">Choose an agency to see its routes and visualization. Select any route to see what people think about it.</h4>
+                            <h4 className="info-text">Choose an agency to see its routes and visualization. Select any
+                                route to see what people think about it.</h4>
                         </div>
                         <div className="row">
                             <div className="col-md-4">
@@ -127,7 +131,13 @@ class App extends Component {
                                 {this.state.route.length !== 0 ?
                                     <CommentList comments={this.props.comments} route={this.state.route}/>
                                     : ""}
-
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-12">
+                                {this.state.route.length !== 0 ?
+                                    <Schedule agency={this.state.agency} route={this.state.route}/>
+                                    : ""}
                             </div>
                         </div>
                     </div>

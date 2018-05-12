@@ -1,6 +1,6 @@
 # NextBus Visualization
 
-Data visualization application built for the final exam of the web development course at Universidad de los Andes. The web app en
+Data visualization application built for the final exam of the web development course at Universidad de los Andes. Fixed a small bug in John Guerra's visualization code. The fix enables a better visualization by sorting distances in the same route by their distance.
 
 Check the live demo [here!](https://nextbusvis.herokuapp.com/)
 

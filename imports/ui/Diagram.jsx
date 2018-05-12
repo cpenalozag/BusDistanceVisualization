@@ -146,6 +146,7 @@ class Diagram extends Component {
                     +route.values[i].lat, +route.values[i].lon);
                 route.total += route.values[i].distance;
             }
+            route.values = route.values.sort((a, b) => a.distance - b.distance);
         }
         return nestedBuses.sort(function (a, b) {
             return b.total - a.total;
